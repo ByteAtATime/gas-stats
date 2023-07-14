@@ -11,6 +11,7 @@
 </script>
 
 <div class="min-h-screen bg-cyan-100 px-10 py-4">
+  <div class="max-w-screen-2xl mx-auto">
   <Search />
 
   <h1 class="text-2xl mb-4">
@@ -74,5 +75,6 @@
         {/each}
       </tbody>
     </table>
+  </div>
   </div>
 </div>
