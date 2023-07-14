@@ -46,7 +46,7 @@
 
   <h1 class="font-bold text-2xl mb-4 mt-8">Transactions by gas fee</h1>
 
-  <div class="shadow overflow-hidden rounded-xl border-b border-gray-200">
+  <div class="shadow overflow-y-hidden rounded-xl border-b border-gray-200">
     <table class="min-w-full bg-white">
       <thead class="bg-gray-800 text-white">
         <tr>
