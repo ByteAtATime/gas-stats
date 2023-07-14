@@ -1,3 +1,8 @@
-# SvelteJS/SvelteKit + TailwindCSS
+# Gas Stats
 
-This is my highly opinionated template for projects using [SvelteJS](https://svelte.dev), [SvelteKit](https://kit.svelte.dev), and [TailwindCSS](https://tailwindcss.com). I also use my personal [Prettier](https://prettier.io) configuration, which many people might not agree with.
+This is a simple app that allows you to see how much gas you've spent, and on what transactions.
+
+Roadmap:
+
+* Clean up code
+* Add support for multiple networks
