@@ -10,9 +10,9 @@
   };
 </script>
 
-<form on:submit|preventDefault={search} class="w-full flex justify-center items-center gap-x-2">
+<form on:submit|preventDefault={search} class="w-full flex justify-center items-center gap-x-2 mb-4">
   <input
-    class="text-xl font-mono w-1/3 px-6 py-3 rounded-xl border-2 border-cyan-700/50 outline-none focus:border-cyan-700/75"
+    class="text-xl font-mono w-3/4 md:w-1/2 lg:w-1/3 px-6 py-3 rounded-xl border-2 border-cyan-700/50 outline-none focus:border-cyan-700/75"
     placeholder="0x..."
     bind:value={address}
   />
