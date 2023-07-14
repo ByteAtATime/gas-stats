@@ -4,5 +4,5 @@ This is a simple app that allows you to see how much gas you've spent, and on wh
 
 Roadmap:
 
-* Clean up code
-* Add support for multiple networks
+- Clean up code
+- Add support for multiple networks

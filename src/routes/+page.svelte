@@ -3,5 +3,5 @@
 </script>
 
 <div class="min-h-screen bg-cyan-100 flex items-center justify-center">
-    <Search />
+  <Search />
 </div>
