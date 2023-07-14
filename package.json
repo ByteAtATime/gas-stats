@@ -30,6 +30,7 @@
   },
   "type": "module",
   "dependencies": {
+    "ts-luxon": "^4.3.2",
     "web3": "^4.0.3"
   }
 }

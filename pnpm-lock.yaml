@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  ts-luxon:
+    specifier: ^4.3.2
+    version: 4.3.2
   web3:
     specifier: ^4.0.3
     version: 4.0.3
@@ -1683,6 +1686,11 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
+
+  /ts-luxon@4.3.2:
+    resolution: {integrity: sha512-Vx4iGyvpKxC0pnY1e7O+btm8HxHqbL3s8WNQ+2KCLqCnO13aW3W5LDK8YtzvLDqlbpOTWO08SNC5Ku4lNb/PKw==}
+    engines: {node: '>=13'}
     dev: false
 
   /tslib@2.5.0:

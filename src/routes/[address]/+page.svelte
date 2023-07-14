@@ -2,6 +2,7 @@
   import type { Stats, Transaction } from "$lib/gas-fee";
   import { transactionFee, weiToEther } from "$lib/util.js";
   import Search from "$lib/components/Search.svelte";
+  import { DateTime } from "ts-luxon";
 
   export let data: { address: string; transactions: Transaction[]; stats: Stats };
 
@@ -55,6 +56,7 @@
       <table class="min-w-full bg-white">
         <thead class="bg-gray-800 text-white">
           <tr>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Timestamp</th>
             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Transaction</th>
             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">To</th>
             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Value</th>
@@ -69,6 +71,7 @@
         <tbody class="text-gray-700">
           {#each transactionsByFee as transaction, i}
             <tr class:bg-gray-100={i % 2 === 0}>
+              <td class="text-left py-3 px-4 font-mono">{DateTime.fromJSDate(transaction.timestamp).toLocaleString(DateTime.DATETIME_SHORT)}</td>
               <td class="text-left py-3 px-4"
                 ><a
                   href="https://etherscan.io/tx/{transaction.hash}"
