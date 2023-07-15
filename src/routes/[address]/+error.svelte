@@ -12,7 +12,7 @@
                 <span class="font-mono font-bold">{CHAIN_TO_NAME[$page.url.searchParams.get("chain") ?? "eth"]}</span>.</p>
             <p class="mb-4">Try searching for a different address or chain.</p>
 
-            <Search />
+            <Search address={$page.params.address} chain={$page.url.searchParams.get("chain")} />
         </div>
     </div>
 {/if}

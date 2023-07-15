@@ -3,8 +3,8 @@
   import Fa from "svelte-fa";
   import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-  let address = "";
-  let chain = "eth";
+  export let address = "";
+  export let chain = "eth";
 
   const search = () => {
     goto(`/${address}?chain=${chain}`);
