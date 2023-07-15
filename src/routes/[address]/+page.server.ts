@@ -9,7 +9,7 @@ const CHAIN_TO_ETHERSCAN: Record<string, [string, string]> = {
   eth: ["api.etherscan.io", ETHERSCAN_API_KEY],
   bsc: ["api.bscscan.com", BSCSCAN_API_KEY],
   polygon: ["api.polygonscan.com", POLYGONSCAN_API_KEY],
-}
+};
 
 export const load: PageServerLoad = async ({ params, url }) => {
   const address = params.address;

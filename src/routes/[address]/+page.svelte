@@ -8,14 +8,14 @@
   export let data: { address: string; transactions: Transaction[]; stats: Stats; chain: string };
 
   let address: string;
-    let transactions: Transaction[] = [];
-    let stats: Stats;
-    let chainSlug: string;
+  let transactions: Transaction[] = [];
+  let stats: Stats;
+  let chainSlug: string;
 
   $: ({ address, transactions, stats, chain: chainSlug } = data);
-  $: transactionsByFee = transactions.sort((a, b) =>
-    Number(b.gasUsed * b.gasPrice - a.gasUsed * a.gasPrice),
-  ).slice(0, 1000);
+  $: transactionsByFee = transactions
+    .sort((a, b) => Number(b.gasUsed * b.gasPrice - a.gasUsed * a.gasPrice))
+    .slice(0, 1000);
 </script>
 
 <div class="min-h-screen bg-cyan-100 px-10 py-4">
@@ -25,7 +25,8 @@
     <h1 class="text-2xl mb-4">
       Stats for <span class="font-mono font-bold"
         >0x{address.replace("0x", "").slice(0, 4)}...{address.slice(-6)}</span
-      > on
+      >
+      on
       <img src="/chains/{chainSlug}.svg" class="inline h-12 w-12" alt="" />
       <span class="font-mono font-bold">{CHAIN_TO_NAME[chainSlug]}</span>
     </h1>
@@ -82,7 +83,11 @@
         <tbody class="text-gray-700">
           {#each transactionsByFee as transaction, i}
             <tr class:bg-gray-100={i % 2 === 0}>
-              <td class="text-left py-3 px-4 font-mono">{DateTime.fromJSDate(transaction.timestamp).toLocaleString(DateTime.DATETIME_SHORT)}</td>
+              <td class="text-left py-3 px-4 font-mono"
+                >{DateTime.fromJSDate(transaction.timestamp).toLocaleString(
+                  DateTime.DATETIME_SHORT,
+                )}</td
+              >
               <td class="text-left py-3 px-4"
                 ><a
                   href="https://etherscan.io/tx/{transaction.hash}"
