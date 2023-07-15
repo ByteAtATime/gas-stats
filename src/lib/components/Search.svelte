@@ -4,9 +4,10 @@
   import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
   let address = "";
+  let chain = "eth";
 
   const search = () => {
-    goto(`/${address}`);
+    goto(`/${address}?chain=${chain}`);
   };
 </script>
 
@@ -16,6 +17,12 @@
     placeholder="0x..."
     bind:value={address}
   />
+
+  <select class="text-xl px-6 py-3 rounded-xl border-2 border-cyan-700/50 outline-none focus:border-cyan-700/75" bind:value={chain}>
+    <option value="eth">Ethereum Mainnet</option>
+    <option value="bsc">Binance Smart Chain</option>
+    <option value="polygon">Polygon Network</option>
+  </select>
 
   <button class="bg-cyan-700 p-4 rounded-xl"
     ><Fa icon={faSearch} class="text-white text-2xl" /></button

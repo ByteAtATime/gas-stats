@@ -3,14 +3,19 @@
   import { transactionFee, weiToEther } from "$lib/util.js";
   import Search from "$lib/components/Search.svelte";
   import { DateTime } from "ts-luxon";
+  import { CHAIN_TO_NAME } from "$lib/chains";
 
-  export let data: { address: string; transactions: Transaction[]; stats: Stats };
+  export let data: { address: string; transactions: Transaction[]; stats: Stats; chain: string };
 
-  const { address, transactions, stats } = data;
+  let address: string;
+    let transactions: Transaction[] = [];
+    let stats: Stats;
+    let chainSlug: string;
 
-  const transactionsByFee = transactions.sort((a, b) =>
+  $: ({ address, transactions, stats, chain: chainSlug } = data);
+  $: transactionsByFee = transactions.sort((a, b) =>
     Number(b.gasUsed * b.gasPrice - a.gasUsed * a.gasPrice),
-  );
+  ).slice(0, 1000);
 </script>
 
 <div class="min-h-screen bg-cyan-100 px-10 py-4">
@@ -20,7 +25,9 @@
     <h1 class="text-2xl mb-4">
       Stats for <span class="font-mono font-bold"
         >0x{address.replace("0x", "").slice(0, 4)}...{address.slice(-6)}</span
-      >
+      > on
+      <img src="/chains/{chainSlug}.svg" class="inline h-12 w-12" alt="" />
+      <span class="font-mono font-bold">{CHAIN_TO_NAME[chainSlug]}</span>
     </h1>
 
     <div
@@ -50,9 +57,13 @@
       </div>
     </div>
 
-    <h1 class="font-bold text-2xl mb-4 mt-8">Transactions by gas fee</h1>
+    <h1 class="font-bold text-2xl mt-8">Transactions by gas fee</h1>
 
-    <div class="shadow overflow-y-hidden rounded-xl border-b border-gray-200">
+    {#if transactionsByFee.length === 1000}
+      <p class="text-sm">List truncated to top 1,000.</p>
+    {/if}
+
+    <div class="shadow overflow-y-hidden rounded-xl border-b border-gray-200 mt-4">
       <table class="min-w-full bg-white">
         <thead class="bg-gray-800 text-white">
           <tr>
