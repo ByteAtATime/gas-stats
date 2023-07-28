@@ -2,7 +2,7 @@
   import type { Stats, Transaction } from "$lib/gas-fee";
   import { transactionFee, weiToEther } from "$lib/util.js";
   import Search from "$lib/components/Search.svelte";
-  import { DateTime } from "ts-luxon";
+  import { DateTime } from "luxon";
   import { CHAIN_TO_EXPLORER, CHAIN_TO_NAME } from "$lib/chains";
   import { navigating, page } from "$app/stores";
   import { Circle2 } from "svelte-loading-spinners";
