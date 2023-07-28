@@ -14,9 +14,24 @@
   let chainSlug: string;
 
   $: ({ address, transactions, stats, chain: chainSlug } = data);
-  $: transactionsByFee = transactions
-    .sort((a, b) => Number(b.gasUsed * b.gasPrice - a.gasUsed * a.gasPrice))
+
+  let sortedTransactions: Transaction[] = []
+  let sorting = { f: (t: Transaction) => Number(transactionFee(t) / BigInt(1e6)), ascending: false };
+
+  $: sortedTransactions = transactions
+    .sort((a, b) => (sorting.f(a) - sorting.f(b)) * (sorting.ascending ? 1 : -1))
     .slice(0, 1000);
+
+  const sortBy = (func: (t: Transaction) => number) => {
+    return () => {
+      if (sorting.f === func) {
+        sorting.ascending = !sorting.ascending;
+      } else {
+        sorting.f = func;
+        sorting.ascending = false;
+      }
+    }
+  }
 </script>
 
 <div class="min-h-screen bg-cyan-100 px-10 py-4">
@@ -59,9 +74,9 @@
       </div>
     </div>
 
-    <h1 class="font-bold text-2xl mt-8">Transactions by gas fee</h1>
+    <h1 class="font-bold text-2xl mt-8">Transactions</h1>
 
-    {#if transactionsByFee.length === 1000}
+    {#if sortedTransactions.length === 1000}
       <p class="text-sm">List truncated to top 1,000.</p>
     {/if}
 
@@ -69,20 +84,20 @@
       <table class="min-w-full bg-white">
         <thead class="bg-gray-800 text-white">
           <tr>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Timestamp</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => t.timestamp.getTime())}>Timestamp</th>
             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Transaction</th>
             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">To</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Value</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Gas Used</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Gas Price (GWEI)</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Transaction Fee</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Value Percentage</th>
-            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Fee Percentage</th
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(t.value / BigInt(1e6)))}>Value</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(t.gasUsed))}>Gas Used</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(t.gasPrice))}>Gas Price (GWEI)</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(transactionFee(t) / BigInt(1e6)))}>TX. Fee</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(transactionFee(t)) / Number(t.value))}>Value Percentage</th>
+            <th class="text-left py-3 px-4 uppercase font-semibold text-sm" on:click={sortBy(t => Number(transactionFee(t)) / 1e18 / Number(stats.totalEtherUsed))}>Total Fee Percentage</th
             >
           </tr>
         </thead>
         <tbody class="text-gray-700">
-          {#each transactionsByFee as transaction, i}
+          {#each sortedTransactions as transaction, i}
             <tr class:bg-gray-100={i % 2 === 0}>
               <td class="text-left py-3 px-4 font-mono"
                 >{DateTime.fromJSDate(transaction.timestamp).toLocaleString(
