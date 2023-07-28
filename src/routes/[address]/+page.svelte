@@ -3,7 +3,7 @@
   import { transactionFee, weiToEther } from "$lib/util.js";
   import Search from "$lib/components/Search.svelte";
   import { DateTime } from "ts-luxon";
-  import { CHAIN_TO_NAME } from "$lib/chains";
+  import { CHAIN_TO_EXPLORER, CHAIN_TO_NAME } from "$lib/chains";
   import { page } from "$app/stores";
 
   export let data: { address: string; transactions: Transaction[]; stats: Stats; chain: string };
@@ -106,14 +106,14 @@
               >
               <td class="text-left py-3 px-4"
                 ><a
-                  href="https://etherscan.io/tx/{transaction.hash}"
+                  href="{CHAIN_TO_EXPLORER[chainSlug]}/tx/{transaction.hash}"
                   class="font-mono text-blue-700 hover:underline"
                   >{transaction.hash.slice(0, 16)}...</a
                 ></td
               >
               <td class="text-left py-3 px-4"
                 ><a
-                  href="https://etherscan.io/address/{transaction.to}"
+                  href="{CHAIN_TO_EXPLORER[chainSlug]}/address/{transaction.to}"
                   class="font-mono text-blue-700 hover:underline">{transaction.to}</a
                 ></td
               >
