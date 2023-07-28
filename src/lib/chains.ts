@@ -8,4 +8,4 @@ export const CHAIN_TO_EXPLORER = {
   eth: "https://etherscan.io",
   bsc: "https://bscscan.com",
   polygon: "https://polygonscan.com",
-}
+};

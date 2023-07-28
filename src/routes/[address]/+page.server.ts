@@ -24,7 +24,10 @@ export const load: PageServerLoad = async ({ params, url }) => {
   }
 
   if (address.endsWith(".eth")) {
-    const ens = new eth.ens.ENS("0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e", "https://eth.llamarpc.com");
+    const ens = new eth.ens.ENS(
+      "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
+      "https://eth.llamarpc.com",
+    );
 
     try {
       address = (await ens.getAddress(address)).toString();

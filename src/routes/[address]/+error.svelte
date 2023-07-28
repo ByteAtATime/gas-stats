@@ -29,8 +29,9 @@
     <div class="w-3/4 md:w-1/2">
       <h1 class="text-4xl font-bold">ENS Domain Unresolved</h1>
       <p>
-        Uh-oh! We couldn't resolve the address for the ENS domain of <span class="font-bold font-mono"
-      >{$page.params.address}</span>.
+        Uh-oh! We couldn't resolve the address for the ENS domain of <span
+          class="font-bold font-mono">{$page.params.address}</span
+        >.
       </p>
       <p class="mb-4">Try searching for a different address.</p>
 
